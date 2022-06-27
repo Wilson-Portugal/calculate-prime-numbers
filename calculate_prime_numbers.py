@@ -7,34 +7,24 @@ import codecs
 import os.path
 import decimal
 
-precision_value = int(100)
-decimal.getcontext().prec = int(precision_value)
+precision_value = int(12)
+decimal.getcontext().prec = int(precision_value) + 2
 
 prime_counter = decimal.Decimal(0)
-max_value = decimal.Decimal(1e12)
-# maximum value of 1e12 is 1,000,000,000,000 (one trillion)
+max_value = decimal.Decimal(10 ** 12)
+# maximum value of ten to the power of twelve is a one with 
+# twelve zeroes, 1,000,000,000,000 (one trillion)
 
-prime_value_file = "prime_value_file.txt"
 prime_list_file = "prime_numbers_list_file.txt"
 
 def read_prime_counter():
-    # read the next prime counter from the prime value file
-    file = codecs.open(prime_value_file, "r", "utf-8")
-    return_value = file.read().strip()
+    # read the next prime counter from the prime numbers list 
+    # file... the number will be the last number previously 
+    # written to the file...
+    file = codecs.open(prime_list_file, "r", "utf-8")
+    return_value = file.readlines()[-1].strip()
     file.close()
     return return_value
-
-def write_prime_counter(number_value):
-    # write the prime counter to the prime value file
-    file = codecs.open(prime_value_file, "w", "utf-8")
-    file.write(str(number_value)+"\n")
-    file.close
-
-def init_prime_value_file():
-    # check for the prime value file and create it if it does not exist
-    if os.path.exists(prime_value_file) == False:
-        print("Prime Value file does not exist, creating file")
-        write_prime_counter(3)
 
 def init_prime_list_file():
     # check for the prime number list file and create it if it does not exist
@@ -111,13 +101,11 @@ def check_for_prime(number_value):
         file.close
         print(str(number_value))
 
-init_prime_value_file()
 init_prime_list_file()
 prime_counter = read_prime_counter()
 
 while decimal.Decimal(prime_counter) <= decimal.Decimal(max_value):
     check_for_prime(prime_counter)
-    write_prime_counter(prime_counter)
     # I am going to increment the prime counter variable by a step 
     # value of one instead of two... i know the practice is to 
     # increment it by a step value of two because no even values 
