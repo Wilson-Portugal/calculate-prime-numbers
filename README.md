@@ -19,9 +19,14 @@ up mostly 24/7 *(such as a headless Raspberry Pi SBC)*, then you can launch it w
 
 `$ nohup nice ./calculate_prime_numbers.py &`
 
-If you want to clear the data created and rerun the script from scratch, you can clear up the datafiles 
+If you are running the script in the background and you want to see the progress that is being made,
+list out the last few lines from the output file with this command.
+
+`$ tail prime_numbers_list_file.txt`
+
+If you want to clear the data created and rerun the script from scratch, you can clear up the datafile 
 first before running the script.
 
-`$ rm prime_*.txt`
+`$ rm prime_numbers_list_file.txt`
 
 I have heavily documented the script file to the point that there is more comments than code.
