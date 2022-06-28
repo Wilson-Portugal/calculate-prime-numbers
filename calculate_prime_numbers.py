@@ -20,9 +20,10 @@ prime_list_file = "prime_numbers_list_file.txt"
 def read_prime_counter():
     # read the next prime counter from the prime numbers list 
     # file... the number will be the last number previously 
-    # written to the file...
+    # written to the file... I want to return that number 
+    # plus one
     file = codecs.open(prime_list_file, "r", "utf-8")
-    return_value = file.readlines()[-1].strip()
+    return_value = file.readlines()[-1].strip() + 1
     file.close()
     return return_value
 
