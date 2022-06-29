@@ -82,7 +82,7 @@ def check_for_prime(number_value):
         # check if the square root of the number value is greater than
         # the prime number being checked
         divided_value = decimal.Decimal(number_value) / decimal.Decimal(prime_number)
-        if decimal.Decimal(divided_value) < decimal.Decimal(prime_number) < decimal.Decimal(prime_number):
+        if decimal.Decimal(divided_value) < decimal.Decimal(prime_number):
             # if the square root of the number value is greater than
             # the prime number being checked, then the number value
             # would be a prime number... set the flag an look no
