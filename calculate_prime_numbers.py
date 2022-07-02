@@ -6,16 +6,16 @@
 
 import codecs
 import os.path
-import decimal
 
 precision_value = int(12)
-decimal.getcontext().prec = int(precision_value) + 2
 
-prime_counter = decimal.Decimal(0)
-max_value = decimal.Decimal(10 ** 12)
+prime_counter = int(0)
+max_value = int(10 ** 12)
 # maximum value of ten to the power of twelve is a one with 
 # twelve zeroes, 1,000,000,000,000 (one trillion)
 # use Decimal precision for large number (is this necessary?)
+# Decimal precision in not only unneccesary but it is a huge
+# contraint on resources and has been removed, July 2, 2000
 
 prime_list_file = "prime_numbers_list_file.txt"
 
@@ -26,7 +26,7 @@ def read_prime_counter():
     # written to the file... I want to return that number 
     # plus one
     file = codecs.open(prime_list_file, "r", "utf-8")
-    return_value = decimal.Decimal(file.readlines()[-1].strip()) + 1
+    return_value = int(file.readlines()[-1].strip()) + 1
     file.close()
     return return_value
 
@@ -83,7 +83,7 @@ def check_for_prime(number_value):
 
         # find the remainder of dividing the number value by the
         # current prime number
-        mod_value = decimal.Decimal(number_value) % decimal.Decimal(prime_number)
+        mod_value = int(number_value) % int(prime_number)
         if mod_value == 0:
             # if the number value is evenly divided by a prime number
             # then the number value is not a prime number... set the
@@ -94,8 +94,8 @@ def check_for_prime(number_value):
 
         # check if the square root of the number value is greater than
         # the prime number being checked
-        divided_value = decimal.Decimal(number_value) / decimal.Decimal(prime_number)
-        if decimal.Decimal(divided_value) < decimal.Decimal(prime_number) < decimal.Decimal(prime_number):
+        divided_value = float(int(number_value) / int(prime_number))
+        if float(divided_value) < float(prime_number):
             # if the square root of the number value is greater than
             # the prime number being checked, then the number value
             # would be a prime number... set the flag an look no
@@ -118,7 +118,7 @@ def check_for_prime(number_value):
 init_prime_list_file()
 prime_counter = read_prime_counter()
 
-while decimal.Decimal(prime_counter) <= decimal.Decimal(max_value):
+while int(prime_counter) <= int(max_value):
     check_for_prime(prime_counter)
     # I am going to increment the prime counter variable by a step 
     # value of one instead of two... i know the practice is to 
@@ -127,4 +127,4 @@ while decimal.Decimal(prime_counter) <= decimal.Decimal(max_value):
     # that if the number starts off on an even number for any 
     # reason, then incrementing with a step value of two will 
     # kill the joy
-    prime_counter = decimal.Decimal(prime_counter) + 1
+    prime_counter = int(prime_counter) + 1
