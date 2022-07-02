@@ -2,6 +2,7 @@
 
 # Wilson Portugal
 # June 27, 2022
+# modified July 2, 2022
 
 import codecs
 import os.path
@@ -14,10 +15,12 @@ prime_counter = decimal.Decimal(0)
 max_value = decimal.Decimal(10 ** 12)
 # maximum value of ten to the power of twelve is a one with 
 # twelve zeroes, 1,000,000,000,000 (one trillion)
+# use Decimal precision for large number (is this necessary?)
 
 prime_list_file = "prime_numbers_list_file.txt"
 
 def read_prime_counter():
+    """get next number after highest prime number"""
     # read the next prime counter from the prime numbers list 
     # file... the number will be the last number previously 
     # written to the file... I want to return that number 
@@ -28,6 +31,7 @@ def read_prime_counter():
     return return_value
 
 def init_prime_list_file():
+    """initialize prime number file list file if not existing"""
     # check for the prime number list file and create it if it does not exist
     if os.path.exists(prime_list_file) == False:
         print("Prime List file does not exist, creating file")
@@ -36,6 +40,7 @@ def init_prime_list_file():
         file.close()
 
 def check_for_prime(number_value):
+    """check if a number is a prime number"""
     # the first thing i want to think about doing here is to open up my list of
     # known prime numbers, and try to divide my number value against each prime
     # number in the list... if my number value is a prime number, then it will
@@ -57,6 +62,14 @@ def check_for_prime(number_value):
     # false if the number value is ever evenly divided by another prime
     # number
     prime_flag = True
+
+    # do not check any numbers that are not integers
+    if number_value != int(number_value):
+        return
+
+    # do not check any numbers less than two
+    if number_value < 2:
+        return
 
     # open prime list file for reading
     file = codecs.open(prime_list_file, "r", "utf-8")
@@ -82,7 +95,7 @@ def check_for_prime(number_value):
         # check if the square root of the number value is greater than
         # the prime number being checked
         divided_value = decimal.Decimal(number_value) / decimal.Decimal(prime_number)
-        if decimal.Decimal(divided_value) < decimal.Decimal(prime_number):
+        if decimal.Decimal(divided_value) < decimal.Decimal(prime_number) < decimal.Decimal(prime_number):
             # if the square root of the number value is greater than
             # the prime number being checked, then the number value
             # would be a prime number... set the flag an look no
