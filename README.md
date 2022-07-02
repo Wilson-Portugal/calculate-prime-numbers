@@ -3,20 +3,35 @@
 
 **Synopsis**
 
-This script is a python script that I wrote and I run on a small under-powered SOC computer, a 
-*Raspberry Pi Model B Rev 2*. I am running it on this device so that I can prove that it can run 
-with limited resources. The script writes to a file a list of prime numbers and it uses that file 
-to find more prime numbers. As I am writing this README.md file, I am already seeing fixes that I 
-can implement into this script for efficiency. I have not had this script run to the level of one 
-trillion yet.
+This script is another python script to calculate prime numbers. I created this script because 
+I woke up in the late night thinking about **prime numbers**. There are better things to think 
+of in the middle of the night. But I was obsessed about how would I find a list of 
+**prime numbers**, and I came up with this algorithm as an idea in my head. I decided to write 
+this in **Python** because I wanted to.
 
-If you set the execute attribute on this file, then you should be able to run it from the command line.
+My thought on this started with thinking about testing a number by seeing if it is divisible by 
+any number. The standard way is to try dividing the number by every number that is smaller than 
+the number. Then, you have to figure that you can skip testing even numbers, because any number
+larger than two is automatically divisible by two.
+
+So, I got to thinking that if I started keeping track of all prime numbers, then I only need to 
+divide the number by a prime number. I do not need to test against every number, or every odd 
+number, just every prime number. Then I figured that when the testing numbers were higher than
+the square root of the number being tested, then that would be the limit of required testing.
+
+So, I wrote this script. I am still learning Python. I have tweaked this a few times. I am 
+running this script on a small under-powered SOC computer, a *Raspberry Pi Model B Rev 2*. 
+I am running it on this device so that I can prove that it can run with limited resources. 
+
+In Linux, set the execute attribute on this file, then you should be able to run it from the 
+command line. In Windows, have fun.
 
 `$ chmod +x calculate_prime_numbers.py
 $ ./calculate_prime_numbers.py`
 
-If you want to run this program in the background and let it chew away, especially on a system that is 
-up mostly 24/7 *(such as a headless Raspberry Pi SBC)*, then you can launch it with this command.
+If you want to run this program in the background and let it chew away, especially on a system 
+that is up mostly 24/7 *(such as a headless Raspberry Pi SBC)*, then you can launch it in 
+Linux with this command .
 
 `$ nohup nice ./calculate_prime_numbers.py &`
 
@@ -29,21 +44,3 @@ If you want to clear the data created and rerun the script from scratch, you can
 first before running the script.
 
 `$ rm prime_numbers_list_file.txt`
-
-I have heavily documented the script file to the point that there is more comments than code.
-
-## Further thoughts
-
-I created this script because I woke up in the late night thinking about **prime numbers**. There are
-better things to think of in the middle of the night. But I was obsessed about how would I find a list
-of **prime numbers**, and I came up with this algorithm as an idea in my head. I decided to write this
-in **Python** because I wanted to. I started creating this without writing anything down on paper. I 
-tweaked it a couple of times.
-
-So, I have a few **Raspberry Pi** devices, and my very first one was a *Raspberry Pi Model B Rev 2*. 
-I have kept up with a headless installation. I run the operating system on a 128GB USB stick. I have 
-been running this thing pretty much non-stop for ten years now. I have been running this script for 
-less than 24 hours, and as of this moment, the largest prime number it has found is 209249. This script
-on this device is not going to set any world records. I have made a few modifications for integrity and 
-efficiency, but this is not the code that will find the largest prime number ever.
-
